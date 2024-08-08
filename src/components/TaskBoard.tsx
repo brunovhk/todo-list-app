@@ -50,6 +50,7 @@ const TaskBoard: React.FC = () => {
         background: (theme) => theme.palette.background.default,
         border: 2,
         borderColor: (theme) => theme.palette.divider,
+        borderRadius: 2,
       }}
     >
       <Typography variant="h3" align="center" sx={{ marginBottom: 2 }}>
@@ -61,11 +62,16 @@ const TaskBoard: React.FC = () => {
         label="Digite uma nova tarefa"
         fullWidth
       />
-      <Button onClick={addTask} variant="contained" sx={{ marginTop: 2 }}>
+      <Button
+        onClick={addTask}
+        variant="contained"
+        color="primary"
+        sx={{ marginTop: 2 }}
+      >
         Adicionar Tarefa
       </Button>
 
-      <Grid container spacing={2} sx={{ marginTop: 2 }}>
+      <Grid container spacing={2} sx={{ marginTop: 1 }}>
         {["pending", "completed", "incomplete"].map((status) => (
           <Grid item xs={12} sm={4} key={status}>
             <Typography variant="h6" gutterBottom>
@@ -84,35 +90,47 @@ const TaskBoard: React.FC = () => {
                     sx={{
                       marginBottom: 2,
                       border: 1,
-                      boxShadow: 3,
+                      borderRadius: 1,
+                      boxShadow: 2,
                       borderColor: (theme) => theme.palette.divider,
                     }}
                   >
                     <CardContent>
                       <Typography variant="body1">{task.content}</Typography>
-                      <Button
-                        onClick={() => handleStatusChange(task.id, "completed")}
-                        variant="outlined"
-                        sx={{ marginRight: 1 }}
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 1,
+                          marginTop: 1,
+                        }}
                       >
-                        Marcar como Concluída
-                      </Button>
-                      <Button
-                        onClick={() =>
-                          handleStatusChange(task.id, "incomplete")
-                        }
-                        variant="outlined"
-                        sx={{ marginRight: 1 }}
-                      >
-                        Marcar como Incompleta
-                      </Button>
-                      <Button
-                        onClick={() => removeTask(task.id)}
-                        variant="outlined"
-                        color="error"
-                      >
-                        Remover
-                      </Button>
+                        <Button
+                          onClick={() =>
+                            handleStatusChange(task.id, "completed")
+                          }
+                          variant="contained"
+                          color="success"
+                        >
+                          Marcar como Concluída
+                        </Button>
+                        <Button
+                          onClick={() =>
+                            handleStatusChange(task.id, "incomplete")
+                          }
+                          variant="contained"
+                          color="warning"
+                        >
+                          Marcar como Incompleta
+                        </Button>
+                        <Button
+                          onClick={() => removeTask(task.id)}
+                          variant="contained"
+                          color="error"
+                        >
+                          Remover Tarefa
+                        </Button>
+                      </Box>
                     </CardContent>
                   </Card>
                 ))}

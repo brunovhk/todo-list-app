@@ -4,38 +4,40 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#1e88e5", // Cor principal para os elementos principais
+      main: "#1976d2", // Azul padrão para elementos principais
     },
     secondary: {
-      main: "#9a9a9a", // Cor secundária
+      main: "#757575", // Cinza escuro para elementos secundários
     },
     background: {
-      default: "#ababab", // Cor de fundo padrão
+      default: "#f5f5f5", // Cor de fundo clara
+      paper: "#ffffff", // Cor de fundo dos cards
     },
     text: {
-      primary: "#000000", // Cor primária do texto
+      primary: "#333333", // Cor do texto primário
+      secondary: "#555555", // Cor do texto secundário
     },
-    divider: "#000000", // Cor do divisor
+    divider: "#e0e0e0", // Cor dos divisores
   },
   components: {
     MuiTextField: {
       styleOverrides: {
         root: {
           "& .MuiInputLabel-root": {
-            color: "#ffffff", // Cor do label
+            color: "#555555", // Cor do label
           },
           "& .MuiInputLabel-root.Mui-focused": {
-            color: "#0084ff", // Cor do label quando focado
+            color: "#1976d2", // Cor do label quando focado
           },
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: "#0084ff", // Cor da borda do campo
+              borderColor: "#1976d2", // Cor da borda do campo
             },
             "&:hover fieldset": {
-              borderColor: "#0000ff", // Cor da borda ao passar o mouse
+              borderColor: "#1565c0", // Cor da borda ao passar o mouse
             },
             "&.Mui-focused fieldset": {
-              borderColor: "#0084ff", // Cor da borda quando focado
+              borderColor: "#1976d2", // Cor da borda quando focado
             },
           },
         },
