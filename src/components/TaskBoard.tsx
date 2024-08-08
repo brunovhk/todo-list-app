@@ -47,9 +47,9 @@ const TaskBoard: React.FC = () => {
     <Box
       sx={{
         padding: 2,
-        background: "#9a9a9a",
+        background: (theme) => theme.palette.background.default,
         border: 2,
-        borderColor: "black",
+        borderColor: (theme) => theme.palette.divider,
       }}
     >
       <Typography variant="h3" align="center" sx={{ marginBottom: 2 }}>
@@ -58,7 +58,6 @@ const TaskBoard: React.FC = () => {
       <TextField
         value={newTaskContent}
         onChange={(e) => setNewTaskContent(e.target.value)}
-        sx={{ input: { background: "#565656" } }}
         label="Digite uma nova tarefa"
         fullWidth
       />
@@ -80,7 +79,15 @@ const TaskBoard: React.FC = () => {
               {tasks
                 .filter((task) => task.status === status)
                 .map((task) => (
-                  <Card key={task.id} sx={{ marginBottom: 2 }}>
+                  <Card
+                    key={task.id}
+                    sx={{
+                      marginBottom: 2,
+                      border: 1,
+                      boxShadow: 3,
+                      borderColor: (theme) => theme.palette.divider,
+                    }}
+                  >
                     <CardContent>
                       <Typography variant="body1">{task.content}</Typography>
                       <Button
