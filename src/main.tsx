@@ -1,11 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { themeOptions } from "./theme.ts";
-
-// Criar tema usando opções fornecidsa
-const theme = createTheme(themeOptions);
+import { ThemeProvider } from "@mui/material";
+import theme from "./theme";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -1,9 +1,10 @@
 import "./App.css";
+import TaskBoard from "./components/TaskBoard";
 
 function App() {
   return (
     <>
-      <h1>Aplicação To-Do List</h1>
+      <TaskBoard />
     </>
   );
 }
