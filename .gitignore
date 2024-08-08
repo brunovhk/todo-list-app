@@ -1,0 +1,45 @@
+# Dependências do npm
+node_modules/
+
+# Build do projeto
+build/
+dist/
+dist-ssr/
+
+# Arquivos de configuração do IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Arquivos temporários do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de log
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Arquivos de cache
+.cache/
+*.cache/
+
+# Arquivos de ambiente
+*.local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Pasta de testes
+coverage/
+
+# Outros arquivos gerados por ferramentas
+*.swp
+*.swo
+*.suo
