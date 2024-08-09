@@ -1,50 +1,49 @@
-# React + TypeScript + Vite
+# To-Do List Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descrição
 
-Currently, two official plugins are available:
+Este projeto é uma aplicação simples de lista de tarefas (To-Do List) construída com **React.js** e **TypeScript**, utilizando a biblioteca **Material-UI** para a estilização. A aplicação permite adicionar, remover e gerenciar tarefas, com persistência dos dados no local storage do navegador.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
 
-## Expanding the ESLint configuration
+- **Adicionar Tarefas**: Permite adicionar novas tarefas à lista.
+- **Remover Tarefas**: Remove tarefas existentes da lista.
+- **Gerenciar Status das Tarefas**: Marque tarefas como "Concluídas" ou "Incompletas".
+- **Persistência de Dados**: Dados das tarefas são salvos no local storage e carregados ao iniciar a aplicação.
+- **Interface Responsiva**: Layout adaptado para diferentes tamanhos de tela com colunas para cada status de tarefa.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Estrutura do Projeto
 
-- Configure the top-level `parserOptions` property like this:
+- **src/**
+  - **components/**
+    - **TaskBoard/**
+      - `TaskBoard.tsx`: Componente principal da lista de tarefas.
+      - `TaskCard.tsx`: Componente para exibir uma tarefa individual.
+      - `index.ts`: Arquivo para exportações do componente `TaskBoard`.
+  - **App.tsx**: Componente raiz da aplicação.
+  - **theme.ts**: Configurações do tema com cores e estilização do Material-UI.
+  - **index.tsx**: Ponto de entrada da aplicação.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Configuração do Ambiente
+
+1. Clone o repositório.
+
+```bash
+git clone <URL_DO_REPOSITORIO>
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Instale as dependências.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+3. Inicie a aplicação.
+
+```bash
+npm run dev
+```
+
+## Licença
+
+Este projeto está licenciado sob a [MIT License](LICENSE).
