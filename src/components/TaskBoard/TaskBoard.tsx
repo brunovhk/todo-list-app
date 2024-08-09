@@ -30,9 +30,14 @@ const saveTasksToLocalStorage = (tasks: Task[]) => {
 const TaskBoard: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>(() => loadTasksFromLocalStorage());
   const [newTaskContent, setNewTaskContent] = useState("");
+  const [inputError, setInputError] = useState(false);
 
   const addTask = () => {
-    if (newTaskContent.trim() === "") return; // Evita a adição de tarefas vazias
+    // Evita a adição de tarefas vazias
+    if (newTaskContent.trim() === "") {
+      setInputError(true);
+      return;
+    }
     const newTask: Task = {
       id: Date.now(),
       content: newTaskContent,
@@ -42,6 +47,7 @@ const TaskBoard: React.FC = () => {
     setTasks(updatedTasks);
     setNewTaskContent("");
     saveTasksToLocalStorage(updatedTasks);
+    setInputError(false);
   };
 
   const removeTask = (taskId: number) => {
@@ -108,6 +114,21 @@ const TaskBoard: React.FC = () => {
         onChange={(e) => setNewTaskContent(e.target.value)}
         label="Digite uma nova tarefa"
         fullWidth
+        error={inputError} // Define o erro
+        helperText={inputError ? "Campo obrigatório" : ""} // Mensagem de erro
+        sx={{
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: inputError ? "red" : undefined, // Cor da borda em erro
+            },
+            "&:hover fieldset": {
+              borderColor: inputError ? "red" : "#0000ff", // Cor da borda ao passar o mouse em erro
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: inputError ? "red" : "#0084ff", // Cor da borda quando focado em erro
+            },
+          },
+        }}
       />
       <Button
         onClick={addTask}
@@ -121,7 +142,11 @@ const TaskBoard: React.FC = () => {
       <Grid container spacing={2} sx={{ marginTop: 1 }}>
         {["pending", "completed", "incomplete"].map((status) => (
           <Grid item xs={12} sm={4} key={status}>
-            <Typography variant="h6" gutterBottom>
+            <Typography
+              variant="h6"
+              gutterBottom
+              sx={{ color: (theme) => theme.palette.primary.main }}
+            >
               {status === "pending"
                 ? "Em andamento"
                 : status === "completed"
