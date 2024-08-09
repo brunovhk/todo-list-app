@@ -16,8 +16,19 @@ type Task = {
   status: "pending" | "completed" | "incomplete";
 };
 
+// Carregar tarefas do local storage
+const loadTasksFromLocalStorage = (): Task[] => {
+  const storedTasks = localStorage.getItem("tasks");
+  return storedTasks ? JSON.parse(storedTasks) : [];
+};
+
+// Salvar tarefas no local storage
+const saveTasksToLocalStorage = (tasks: Task[]) => {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+};
+
 const TaskBoard: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>(() => loadTasksFromLocalStorage());
   const [newTaskContent, setNewTaskContent] = useState("");
 
   const addTask = () => {
@@ -27,19 +38,55 @@ const TaskBoard: React.FC = () => {
       content: newTaskContent,
       status: "pending", // Definição do status inicial
     };
-    setTasks([...tasks, newTask]);
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
     setNewTaskContent("");
+    saveTasksToLocalStorage(updatedTasks);
   };
 
   const removeTask = (taskId: number) => {
-    setTasks(tasks.filter((task) => task.id !== taskId));
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(updatedTasks);
+    saveTasksToLocalStorage(updatedTasks);
   };
 
   const handleStatusChange = (taskId: number, newStatus: Task["status"]) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === taskId ? { ...task, status: newStatus } : task
-      )
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, status: newStatus } : task
+    );
+    setTasks(updatedTasks);
+    saveTasksToLocalStorage(updatedTasks);
+  };
+  // Renderização condicional dos botões
+  const renderButtons = (task: Task) => {
+    return (
+      <>
+        {task.status !== "completed" && (
+          <Button
+            onClick={() => handleStatusChange(task.id, "completed")}
+            variant="contained"
+            color="success"
+          >
+            Marcar como Concluída
+          </Button>
+        )}
+        {task.status !== "incomplete" && (
+          <Button
+            onClick={() => handleStatusChange(task.id, "incomplete")}
+            variant="contained"
+            color="warning"
+          >
+            Marcar como Incompleta
+          </Button>
+        )}
+        <Button
+          onClick={() => removeTask(task.id)}
+          variant="contained"
+          color="error"
+        >
+          Remover Tarefa
+        </Button>
+      </>
     );
   };
 
@@ -105,31 +152,7 @@ const TaskBoard: React.FC = () => {
                           marginTop: 1,
                         }}
                       >
-                        <Button
-                          onClick={() =>
-                            handleStatusChange(task.id, "completed")
-                          }
-                          variant="contained"
-                          color="success"
-                        >
-                          Marcar como Concluída
-                        </Button>
-                        <Button
-                          onClick={() =>
-                            handleStatusChange(task.id, "incomplete")
-                          }
-                          variant="contained"
-                          color="warning"
-                        >
-                          Marcar como Incompleta
-                        </Button>
-                        <Button
-                          onClick={() => removeTask(task.id)}
-                          variant="contained"
-                          color="error"
-                        >
-                          Remover Tarefa
-                        </Button>
+                        {renderButtons(task)}
                       </Box>
                     </CardContent>
                   </Card>
