@@ -18,11 +18,10 @@ Este projeto é uma aplicação simples de lista de tarefas (To-Do List) constru
   - **components/**
     - **TaskBoard/**
       - `TaskBoard.tsx`: Componente principal da lista de tarefas.
-      - `TaskCard.tsx`: Componente para exibir uma tarefa individual.
       - `index.ts`: Arquivo para exportações do componente `TaskBoard`.
   - **App.tsx**: Componente raiz da aplicação.
   - **theme.ts**: Configurações do tema com cores e estilização do Material-UI.
-  - **index.tsx**: Ponto de entrada da aplicação.
+  - **main.tsx**: Ponto de entrada da aplicação.
 
 ## Configuração do Ambiente
 
